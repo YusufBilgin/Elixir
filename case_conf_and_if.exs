@@ -34,7 +34,6 @@ end
 
 
 # cond syntax 
-
 cond do
     2 + 2 == 5 ->
         "This will not be True"
@@ -44,4 +43,23 @@ cond do
         "But this will"
 end    
 
- 
+
+# if syntax
+if true do
+    "This works!"
+end
+
+
+# unless syntax
+unless true do
+    "This will never be seen"
+end
+
+
+# if and else supports also else blocks
+if nil do
+    "This won't be seen"
+else
+    "This will"
+end
+
