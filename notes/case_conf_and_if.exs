@@ -1,7 +1,7 @@
 # case syntax
 x = 1
 case x do
-    1 -> 
+    1 ->
         "x is equal to 1"
     2 ->
         "x is equal to 2"
@@ -27,13 +27,13 @@ end
 
 # anonymous functions can also have clauses and guards
 # note that the arguments in each anonymous function clause needs to be the same
-f = fn 
+f = fn
     x, y when x > 0 -> x + y
     x, y -> x * y
 end
 
 
-# cond syntax 
+# cond syntax
 cond do
     2 + 2 == 5 ->
         "This will not be True"
@@ -41,7 +41,7 @@ cond do
         "Nor this"
     1 + 1 == 2 ->
         "But this will"
-end    
+end
 
 
 # if syntax
@@ -62,4 +62,3 @@ if nil do
 else
     "This will"
 end
-
