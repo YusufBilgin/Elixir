@@ -2,7 +2,7 @@
 keyword_list = [key: value, key2: value2] # key is an atom
 keyword_list[:key] # reading the value of a keyword
 
-# note: keyword lists are simply lists, so it will take much time
+# note: keyword lists are simply(linked) lists, so it will take much time
 # to find a key by working with big lists. Therefore u can use map
 # instead of using keyword lists.
 
