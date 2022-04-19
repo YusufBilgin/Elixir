@@ -8,7 +8,7 @@ Enum.sum(1..10)
 # The pipe operator |>
 # it takes the output from the expression on the left and passes it
 # as the first argument to the function call on its right side
-1..100 |> Enum.sum()
+1..100 |> Enum.map(&(&1 * 3)) |> Enum.sum()
 
 
 # As an alternative to Enum, Elixir provides the Stream module which supports lazy operations
