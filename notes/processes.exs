@@ -5,9 +5,10 @@
 # see the docs: https://hexdocs.pm/elixir/Process.html
 
 
-# spawning new process
+# create a new process
 spawn(fn -> 1 + 2 end)
 # spawn/1 takes a function which it will execute in another process
+spawn_link(fn -> 1 + 2 end)
 
 
 # We can retrieve the PID of the current process by calling self/0
@@ -39,3 +40,43 @@ end
 
 
 # While in the shell, we can use flush/0 that prints all the messages in the mailbox
+
+
+# Tasks
+# Tasks build on top of the spawn functions to provide better error reports and introspection
+# Task module provides also functions to ease distribution like Task.async/1 and Task.await/1
+Task.start(fn -> 1 + 2 end)
+
+
+# State
+# using a process that loop infinitely we can store data in memory
+defmodule KV do
+  def start_link do
+    Task.start_link(fn -> loop(%{}) end)
+  end
+
+  defp loop(map) do
+    receive do
+      {:get, key, caller} ->
+        send(caller, Map.get(map, key))
+        loop(map)
+      {:put, key, value} ->
+        loop(Map.put(map, key, value))
+    end
+  end
+end
+
+{:ok, pid} = KV.start_link()  # init
+send(pid, {:put, :hello, :world})  # add {:hello => :world} to map
+send(pid, {:get, :hello, self()})  # get the value from :hello
+
+# we can also register the pid
+Process.register(pid, :kv)
+send(:kv, {:get, :hello, self()})
+
+
+# Agent module
+# see docs: https://hexdocs.pm/elixir/Agent.html
+{:ok, pid} = Agent.start_link(fn -> %{} end)
+Agend.update(pid, fn map -> Map.put(map, :hello, :world) end)
+Agend.get(pid, fn map -> Map.get(map, :hello) end)
