@@ -80,3 +80,9 @@ send(:kv, {:get, :hello, self()})
 {:ok, pid} = Agent.start_link(fn -> %{} end)
 Agend.update(pid, fn map -> Map.put(map, :hello, :world) end)
 Agend.get(pid, fn map -> Map.get(map, :hello) end)
+
+
+# An example that runs Enum.take_every/2 in a process and send us the output
+self_pid = self()
+enumerable = File.stream!("path/to/file.txt")
+spawn_link(fn -> send(self_pid, Enum.take_every(enumerable, 1)) end)
