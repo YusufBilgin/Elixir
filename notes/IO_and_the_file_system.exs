@@ -6,8 +6,9 @@ IO.gets("yes or no? ")
 
 # File module
 {:ok, file} = File.open("hello", [:write])  # creates a file if there is no one named hello
+# File.open/2 creates a process
 IO.binwrite(file, "world")
-File.close(file)
+File.close(file)  # close process
 
 File.read("hello")
 
@@ -35,4 +36,8 @@ end
 
 
 # Path module
-Path.expand("")
+Path.expand("") # it will return user home path
+Path.expand("~/hello")  # c:/Users/user/hello
+Path.expand("/hello")   # c:/hello
+
+Path.join("foo", "bar") # "foo/bar"
