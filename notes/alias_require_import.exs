@@ -20,5 +20,20 @@ import List, only: [duplicate: 2]  # we imported only the function duplicate (wi
 # note: import is lexically scoped
 
 
+# it is possible to alias, import or require multiple modules at once
+alias MyApp.{Foo, Bar, Baz}
+
+
 # Invokes the custom code defined in Foo as an extension point
 use Foo
+
+# the following module:
+defmodule Example do
+  use Feature, option: :value
+end
+
+# is compiled into
+defmodule Example do
+  require Feature
+  Feature.__using__(option: :value)
+end
