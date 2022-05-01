@@ -26,3 +26,9 @@ defmodule MyServer do
   @initial_state %{host: "127.0.0.1", port: 3456}
   IO.inspect @initial_state
 end
+
+
+def some_function, do: do_something_with(@example)
+
+def some_function, do: do_something_with(example())
+defp example, do: @example
