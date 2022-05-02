@@ -32,3 +32,14 @@ def some_function, do: do_something_with(@example)
 
 def some_function, do: do_something_with(example())
 defp example, do: @example
+
+
+defmodule MyTest do
+  use ExUnit.Case, async: true
+
+  @tag :external
+  @tag os: :unix
+  test "contacts external service" do
+    # ...
+  end
+end
