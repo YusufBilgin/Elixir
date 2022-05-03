@@ -34,6 +34,8 @@ def some_function, do: do_something_with(example())
 defp example, do: @example
 
 
+
+# as temporary storage
 defmodule MyTest do
   use ExUnit.Case, async: true
 
